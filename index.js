@@ -1,6 +1,7 @@
 const express = require('express');
 const { userRouter } = require('./router/user.router');
 const { connection } = require('./db');
+const { blogRouter } = require('./router/blog.router');
 require('dotenv').config()
 
 const app = express()
@@ -10,6 +11,7 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json())
 
 app.use('/user', userRouter)
+app.use('/blog', blogRouter)
 app.get('/', (req, res) => {
     res.send({ msg: 'home page' })
 })
