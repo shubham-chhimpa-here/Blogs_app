@@ -2,6 +2,7 @@ const express = require('express');
 const { userRouter } = require('./router/user.router');
 const { connection } = require('./db');
 const { blogRouter } = require('./router/blog.router');
+const cors = require('cors')
 require('dotenv').config()
 
 const app = express()
@@ -9,9 +10,10 @@ const app = express()
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json())
-
+app.use(cors())
 app.use('/user', userRouter)
 app.use('/blog', blogRouter)
+
 app.get('/', (req, res) => {
     res.send({ msg: 'home page' })
 })
