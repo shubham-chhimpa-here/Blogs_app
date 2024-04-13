@@ -10,7 +10,11 @@ const blogSchema = mongoose.Schema({
   impressions: {
     type: Number,
     default: 0
-  }
+  },
+  createdAt: {
+    type: String,
+    default: Date() 
+  },
 })
 
 const BlogModel = mongoose.model('blog', blogSchema)
