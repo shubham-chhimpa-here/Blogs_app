@@ -41,11 +41,17 @@ blogRouter.get('/:id',  (req, res) => {
 })
 
 blogRouter.post('/add', async (req, res) => {
-    console.log(req.body)
+    
     const data = new BlogModel(req.body)
     await data.save()
     res.send({ msg: 'added ', data })
 
+})
+
+blogRouter.delete('/:id', async (req, res) => {
+  const {id} = req.params;
+  await BlogModel.findByIdAndDelete(id)
+  res.send({msg: 'post deleted succesfully'})
 })
 
 module.exports = { blogRouter }
