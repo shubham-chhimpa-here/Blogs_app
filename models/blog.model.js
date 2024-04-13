@@ -13,7 +13,7 @@ const blogSchema = mongoose.Schema({
   },
   createdAt: {
     type: String,
-    default: Date() 
+    default: "0 0 0 0 0"
   },
 })
 

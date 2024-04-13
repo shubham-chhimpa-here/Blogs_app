@@ -3,7 +3,7 @@ const { BlogModel } = require('../models/blog.model')
 const blogRouter = express.Router()
 
 
-blogRouter.get('/',  (req, res) => {
+blogRouter.get('/', (req, res) => {
     BlogModel.find()
         .then(posts => {
             // Iterate through each post and update the impressions field
@@ -15,33 +15,33 @@ blogRouter.get('/',  (req, res) => {
             return Promise.all(updatePromises);
         })
         .then(updatedPosts => {
-            console.log(updatedPosts);
+
             res.send(updatedPosts)
         })
         .catch(err => {
-            console.error(err);
+
             res.send(err)
-        }); 
+        });
 
 
 })
 
-blogRouter.get('/:id',  (req, res) => {
-    const {id} = req.params
+blogRouter.get('/:id', (req, res) => {
+    const { id } = req.params
     BlogModel.findByIdAndUpdate(id, { $inc: { views: 1 } }, { new: true })
-    .then(post => {
-        console.log(post)
-        res.send(post)
-    })
-    .catch(err => {
-        console.log(err)
-        res.send(err)
-    })
+        .then(post => {
+
+            res.send(post)
+        })
+        .catch(err => {
+
+            res.send(err)
+        })
 
 })
 
 blogRouter.post('/add', async (req, res) => {
-    
+
     const data = new BlogModel(req.body)
     await data.save()
     res.send({ msg: 'added ', data })
@@ -49,9 +49,9 @@ blogRouter.post('/add', async (req, res) => {
 })
 
 blogRouter.delete('/:id', async (req, res) => {
-  const {id} = req.params;
-  await BlogModel.findByIdAndDelete(id)
-  res.send({msg: 'post deleted succesfully'})
+    const { id } = req.params;
+    await BlogModel.findByIdAndDelete(id)
+    res.send({ msg: 'post deleted succesfully' })
 })
 
 module.exports = { blogRouter }
