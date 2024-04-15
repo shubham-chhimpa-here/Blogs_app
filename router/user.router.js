@@ -8,6 +8,9 @@ userRouter.get('/', async (req, res) => {
 })
 
 userRouter.post('/register', async (req, res) => {
+
+    const isExist = UserModel.find({email:req.body.email})
+    console.log(isExist)
     const data = new UserModel(req.body)
     await data.save()
 
@@ -15,10 +18,11 @@ userRouter.post('/register', async (req, res) => {
 })
 
 userRouter.post('/login', async (req, res) => {
-    const { name, email, password } = req.body
-    console.log(name, email, password)
+    const { email, password } = req.body
+    console.log(email, password)
     const user = await UserModel.findOne({ email })
     if (user) {
+        console.log(user, req.body)
         if (user.password === password) {
             res.send({ status: true, token: 'token' })
         }
