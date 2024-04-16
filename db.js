@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
-const url = process.env.mongoURL || `mongodb://localhost:27017/simple_blog`
+require('dotenv').config()
+const url = process.env.mongoURL;
 const connection = mongoose.connect(url)
 
 module.exports = connection;
