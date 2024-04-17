@@ -43,8 +43,13 @@ blogRouter.get('/:id', (req, res) => {
 blogRouter.post('/add', async (req, res) => {
 
     const data = new BlogModel(req.body)
-    await data.save()
-    res.send({ msg: 'added ', data })
+    try {
+        await data.save()
+        res.send({ msg: 'added ', data })
+        
+    } catch (error) {
+        res.send({msg: 'something went wrong'})
+    }
 
 })
 
