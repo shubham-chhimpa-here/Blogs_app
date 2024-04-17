@@ -2,7 +2,7 @@ const { LogModel } = require("../models/logger.model");
 
 async function logger(req, res, next) {
     const requestTime = new Date();
-    const requestIP = req.ip;
+    const requestIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const requestMethod = req.method;
     const requestURL = req.originalUrl;
 
