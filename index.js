@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 8080;
 
 app.use(express.json())
 app.use(cors())
-app.use(logger)
+// app.use(logger)
 app.use('/user', userRouter)
 app.use('/blog', blogRouter)
 
