@@ -9,18 +9,22 @@ require('dotenv').config()
 const app = express()
 
 const PORT = process.env.PORT || 8080;
+const allowedOrigins = process.env.allowedOrigins;
 
 app.use(express.json())
 app.use(cors())
 // app.use(logger)
 app.use((req, res, next) => {
     const origin = req.headers.origin;
-    console.log(origin)
-    // if (allowedOrigins.includes(origin)) {
-    //     res.setHeader('Access-Control-Allow-Origin', origin);
-    // }
-    // // other CORS headers...
+    // console.log(origin)
+    if (allowedOrigins === origin) {
+        // res.setHeader('Access-Control-Allow-Origin', origin);
     next();
+    }
+    else {
+    res.send({msg: 'not authorized'})
+    }
+    // // other CORS headers...
 });
 app.use('/user', userRouter)
 app.use('/blog', blogRouter)
