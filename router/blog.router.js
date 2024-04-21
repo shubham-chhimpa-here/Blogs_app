@@ -6,17 +6,8 @@ const blogRouter = express.Router()
 blogRouter.get('/', (req, res) => {
     BlogModel.find()
         .then(posts => {
-            // Iterate through each post and update the impressions field
-            const updatePromises = posts.map(post => {
-                return BlogModel.findByIdAndUpdate(post._id, { $inc: { impressions: 1 } }, { new: true });
-            });
 
-            // Wait for all update operations to complete
-            return Promise.all(updatePromises);
-        })
-        .then(updatedPosts => {
-
-            res.send(updatedPosts)
+            res.send(posts)
         })
         .catch(err => {
 
@@ -46,9 +37,9 @@ blogRouter.post('/add', async (req, res) => {
     try {
         await data.save()
         res.send({ msg: 'added ', data })
-        
+
     } catch (error) {
-        res.send({msg: 'something went wrong'})
+        res.send({ msg: 'something went wrong' })
     }
 
 })
