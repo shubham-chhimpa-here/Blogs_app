@@ -4,7 +4,7 @@ const blogRouter = express.Router()
 
 
 blogRouter.get('/', (req, res) => {
-    BlogModel.find()
+    BlogModel.find().sort({ createdAt: -1 })
         .then(posts => {
 
             res.send(posts)
