@@ -16,7 +16,8 @@ app.use(cors())
 // app.use(logger)
 app.use((req, res, next) => {
     const origin = req.headers.origin;
-    // console.log(origin)
+    console.log(origin, allowedOrigins)
+    
     if (allowedOrigins === origin) {
         // res.setHeader('Access-Control-Allow-Origin', origin);
     next();
