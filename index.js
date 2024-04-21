@@ -13,6 +13,15 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json())
 app.use(cors())
 // app.use(logger)
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    console.log(origin)
+    // if (allowedOrigins.includes(origin)) {
+    //     res.setHeader('Access-Control-Allow-Origin', origin);
+    // }
+    // // other CORS headers...
+    next();
+});
 app.use('/user', userRouter)
 app.use('/blog', blogRouter)
 
